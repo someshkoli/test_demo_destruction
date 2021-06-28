@@ -25,10 +25,10 @@ jobs:
           property_name: demoUrl
           env_var: TEST_URL
       - run:
-        name: Output pulumi to artifacts
-        command: |
-          echo ${TEST_URL};
-          pulumi stack output >> /tmp/pulumi_output;
+          name: Output pulumi to artifacts
+          command: |
+            echo ${TEST_URL};
+            pulumi stack output >> /tmp/pulumi_output;
       - store_artifacts:
           path: /tmp/pulumi_output
           destination: pulumi_output
