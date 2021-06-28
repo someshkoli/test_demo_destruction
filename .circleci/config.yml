@@ -12,12 +12,12 @@ jobs:
       - setup_remote_docker:
           version: 19.03.13
       - pulumi/login
+      - pulumi/stack_init:
+          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
       - run:
             command: |
               npm install
               pulumi config set aws:region ap-south-1
-      - pulumi/stack_init:
-          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
       - pulumi/update:
           stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
       - pulumi/stack_output:
