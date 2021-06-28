@@ -10,8 +10,29 @@ jobs:
     working_directory: ~/repo/
     steps:
       - checkout
-      - orb-tools/post-pr-comment:
-          comment: Hello
+#       - orb-tools/post-pr-comment:
+#           bot-token-variable: GITHUB_TOKEN
+#           bot-user: someshkoli
+#           comment: Helloooooawdwadaaaa
+      - run:
+            command: >
+              PR_NUMBER=$(git log -1 --pretty=%s. | sed -n "$SED_EXP")
+
+              echo "PR_NUMBER is ${PR_NUMBER}"
+
+              if [ "$PR_NUMBER" == "" ];then
+                  echo "No pr found; do nothing. If this is a mistake, check if your PR commit message matches the $SED_EXP sed expression."
+                  exit 0
+              fi
+              echo "${BOT_USER}"
+              curl -X POST -u "${BOT_USER}:${BOT_TOKEN}"
+              "https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/issues/${PR_NUMBER}/comments"
+              -d "{\"body\":\"${COMMENT}\"}"
+            environment:
+              BOT_TOKEN: $GITHUB_TOKEN
+              BOT_USER: someshkoli
+              COMMENT: awdawdawdawdadwadwadwdawda
+              SED_EXP: 's/Merge pull request #\([0-9]*\) from.*/\1/p'	
       # - setup_remote_docker:
       #     version: 19.03.13
       # - pulumi/login
