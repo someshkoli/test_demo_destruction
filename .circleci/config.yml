@@ -12,7 +12,7 @@ jobs:
       - checkout
       - orb-tools/post-pr-comment:
           comment: Helloooooawdwadaaaa
-          bot-token-variable: GITHUB_TOKEN
+          bot-token-variable: $GITHUB_TOKEN
           bot-user: someshkoli
       # - setup_remote_docker:
       #     version: 19.03.13
