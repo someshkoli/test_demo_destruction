@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   pulumi: pulumi/pulumi@2.0.0
+  pr-comment: benjlevesque/pr-comment@0.1.9
 
 jobs:
   build:
@@ -9,23 +10,32 @@ jobs:
     working_directory: ~/repo/
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 19.03.13
-      - pulumi/login
-      - pulumi/stack_init:
-          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
-      - run:
-            command: |
-              npm install
-              pulumi config set aws:region ap-south-1
-      - pulumi/update:
-          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
-      - pulumi/stack_output:
-          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
-          property_name: demoUrl
-          env_var: TEST_URL
-      - run: echo ${TEST_URL}
-      - pulumi/destroy:
-          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
-      - pulumi/stack_rm:
-          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+      - pr-comment: 
+          comment: Hello
+      # - setup_remote_docker:
+      #     version: 19.03.13
+      # - pulumi/login
+      # - pulumi/stack_init:
+      #     stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+      # - run:
+      #       command: |
+      #         npm install
+      #         pulumi config set aws:region ap-south-1
+      # - pulumi/update:
+      #     stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+      # - pulumi/stack_output:
+      #     stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+      #     property_name: demoUrl
+      #     env_var: TEST_URL
+      # - run:
+      #     name: Output pulumi to artifacts
+      #     command: |
+      #       echo ${TEST_URL};
+      #       pulumi stack output >> /tmp/pulumi_output;
+      # - store_artifacts:
+      #     path: /tmp/pulumi_output
+      #     destination: pulumi_output
+      # - pulumi/destroy:
+      #     stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+      # - pulumi/stack_rm:
+      #     stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
