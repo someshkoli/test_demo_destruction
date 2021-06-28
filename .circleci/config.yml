@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   pulumi: pulumi/pulumi@2.0.0
   pr-comment: benjlevesque/pr-comment@0.1.9
-
+ 
 jobs:
   build:
     docker:
@@ -10,7 +10,7 @@ jobs:
     working_directory: ~/repo/
     steps:
       - checkout
-      - pr-comment: 
+      - pr-comment:
           comment: Hello
       # - setup_remote_docker:
       #     version: 19.03.13
