@@ -11,9 +11,9 @@ jobs:
     steps:
       - checkout
       - orb-tools/post-pr-comment:
-          comment: Helloooooawdwadaaaa
-          bot-token-variable: $GITHUB_TOKEN
+          bot-token-variable: GITHUB_TOKEN
           bot-user: someshkoli
+          comment: Helloooooawdwadaaaa
       # - setup_remote_docker:
       #     version: 19.03.13
       # - pulumi/login
