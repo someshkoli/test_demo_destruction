@@ -12,6 +12,9 @@ jobs:
       - setup_remote_docker:
           version: 19.03.13
       - pulumi/login
+      - run:
+            command: |
+              npm install
       - pulumi/stack_init:
           stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
       - pulumi/update:
