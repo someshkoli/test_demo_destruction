@@ -1,0 +1,1755 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2021-06-28T09:39:44.95256399+05:30",
+            "magic": "94a8d332c6d4d6a70fc7157286c64b1cac704d59c1ae8de7335dde07862fe21b",
+            "version": "v3.4.0"
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "imAmitto",
+                "project": "circle_ci_demo",
+                "stack": "demo2"
+            }
+        },
+        "resources": [
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2",
+                "custom": false,
+                "type": "pulumi:pulumi:Stack",
+                "outputs": {
+                    "url": "http://nlb-fe94332-4773ad23cea45f12.elb.ap-south-1.amazonaws.com/"
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1",
+                "custom": true,
+                "id": "57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "type": "pulumi:providers:aws",
+                "inputs": {
+                    "profile": "dev",
+                    "region": "ap-south-1",
+                    "version": "4.9.1"
+                },
+                "outputs": {
+                    "profile": "dev",
+                    "region": "ap-south-1",
+                    "version": "4.9.1"
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "custom": false,
+                "type": "awsx:x:ecs:FargateTaskDefinition",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster::theiaJavaExamCluster",
+                "custom": false,
+                "type": "awsx:x:ecs:Cluster",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateService::app-svc",
+                "custom": false,
+                "type": "awsx:x:ecs:FargateService",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer::nlb",
+                "custom": false,
+                "type": "awsx:lb:NetworkLoadBalancer",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:NetworkLoadBalancer::nlb"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecr/repository:Repository::theia-java-exam",
+                "custom": true,
+                "id": "theia-java-exam-1aed4a4",
+                "type": "aws:ecr/repository:Repository",
+                "inputs": {
+                    "__defaults": [
+                        "imageTagMutability",
+                        "name"
+                    ],
+                    "imageTagMutability": "MUTABLE",
+                    "name": "theia-java-exam-1aed4a4"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                    "arn": "arn:aws:ecr:ap-south-1:879477489453:repository/theia-java-exam-1aed4a4",
+                    "encryptionConfigurations": [
+                        {
+                            "encryptionType": "AES256",
+                            "kmsKey": ""
+                        }
+                    ],
+                    "id": "theia-java-exam-1aed4a4",
+                    "imageScanningConfiguration": {
+                        "scanOnPush": false
+                    },
+                    "imageTagMutability": "MUTABLE",
+                    "name": "theia-java-exam-1aed4a4",
+                    "registryId": "879477489453",
+                    "repositoryUrl": "879477489453.dkr.ecr.ap-south-1.amazonaws.com/theia-java-exam-1aed4a4",
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-execution",
+                "custom": true,
+                "id": "hello-world-execution-ec48ee9",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "hello-world-execution-ec48ee9",
+                    "path": "/"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::879477489453:role/hello-world-execution-ec48ee9",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2021-06-28T03:27:01Z",
+                    "description": "",
+                    "forceDetachPolicies": false,
+                    "id": "hello-world-execution-ec48ee9",
+                    "inlinePolicies": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "managedPolicyArns": [],
+                    "maxSessionDuration": 3600,
+                    "name": "hello-world-execution-ec48ee9",
+                    "path": "/",
+                    "tags": {},
+                    "tagsAll": {},
+                    "uniqueId": "AROA4ZRHRP4WUVFPJTATW"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-task",
+                "custom": true,
+                "id": "hello-world-task-c89dc4f",
+                "type": "aws:iam/role:Role",
+                "inputs": {
+                    "__defaults": [
+                        "forceDetachPolicies",
+                        "maxSessionDuration",
+                        "name",
+                        "path"
+                    ],
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}",
+                    "forceDetachPolicies": false,
+                    "maxSessionDuration": 3600,
+                    "name": "hello-world-task-c89dc4f",
+                    "path": "/"
+                },
+                "outputs": {
+                    "arn": "arn:aws:iam::879477489453:role/hello-world-task-c89dc4f",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "createDate": "2021-06-28T03:27:02Z",
+                    "description": "",
+                    "forceDetachPolicies": false,
+                    "id": "hello-world-task-c89dc4f",
+                    "inlinePolicies": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "managedPolicyArns": [],
+                    "maxSessionDuration": 3600,
+                    "name": "hello-world-task-c89dc4f",
+                    "path": "/",
+                    "tags": {},
+                    "tagsAll": {},
+                    "uniqueId": "AROA4ZRHRP4W26JBFSG6U"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "assumeRolePolicy": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::hello-world",
+                "custom": true,
+                "id": "hello-world-2801eb5",
+                "type": "aws:cloudwatch/logGroup:LogGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "name": "hello-world-2801eb5",
+                    "retentionInDays": 1
+                },
+                "outputs": {
+                    "arn": "arn:aws:logs:ap-south-1:879477489453:log-group:hello-world-2801eb5",
+                    "id": "hello-world-2801eb5",
+                    "kmsKeyId": "",
+                    "name": "hello-world-2801eb5",
+                    "retentionInDays": 1,
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "retentionInDays": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::theiaJavaExamCluster",
+                "custom": false,
+                "type": "awsx:x:ec2:SecurityGroup",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster::theiaJavaExamCluster"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::theiaJavaExamCluster",
+                "custom": true,
+                "id": "arn:aws:ecs:ap-south-1:879477489453:cluster/theiaJavaExamCluster-4b8becc",
+                "type": "aws:ecs/cluster:Cluster",
+                "inputs": {
+                    "__defaults": [
+                        "name"
+                    ],
+                    "name": "theiaJavaExamCluster-4b8becc"
+                },
+                "outputs": {
+                    "arn": "arn:aws:ecs:ap-south-1:879477489453:cluster/theiaJavaExamCluster-4b8becc",
+                    "capacityProviders": [],
+                    "defaultCapacityProviderStrategies": [],
+                    "id": "arn:aws:ecs:ap-south-1:879477489453:cluster/theiaJavaExamCluster-4b8becc",
+                    "name": "theiaJavaExamCluster-4b8becc",
+                    "settings": [
+                        {
+                            "name": "containerInsights",
+                            "value": "disabled"
+                        }
+                    ],
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster::theiaJavaExamCluster",
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc::default-vpc",
+                "custom": false,
+                "type": "awsx:x:ec2:Vpc",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc::default-vpc",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc::default-vpc-ca5645a2"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecr/lifecyclePolicy:LifecyclePolicy::theia-java-exam",
+                "custom": true,
+                "id": "theia-java-exam-1aed4a4",
+                "type": "aws:ecr/lifecyclePolicy:LifecyclePolicy",
+                "inputs": {
+                    "__defaults": [],
+                    "policy": "{\"rules\":[{\"rulePriority\":10,\"description\":\"remove untagged images\",\"selection\":{\"tagStatus\":\"untagged\",\"countType\":\"imageCountMoreThan\",\"countNumber\":1},\"action\":{\"type\":\"expire\"}}]}",
+                    "repository": "theia-java-exam-1aed4a4"
+                },
+                "outputs": {
+                    "id": "theia-java-exam-1aed4a4",
+                    "policy": "{\"rules\":[{\"rulePriority\":10,\"description\":\"remove untagged images\",\"selection\":{\"tagStatus\":\"untagged\",\"countType\":\"imageCountMoreThan\",\"countNumber\":1},\"action\":{\"type\":\"expire\"}}]}",
+                    "registryId": "879477489453",
+                    "repository": "theia-java-exam-1aed4a4"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecr/repository:Repository::theia-java-exam"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "policy": null,
+                    "repository": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecr/repository:Repository::theia-java-exam"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/rolePolicyAttachment:RolePolicyAttachment::hello-world-execution-58ed699a",
+                "custom": true,
+                "id": "hello-world-execution-ec48ee9-20210628032714440900000001",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+                    "role": "hello-world-execution-ec48ee9"
+                },
+                "outputs": {
+                    "id": "hello-world-execution-ec48ee9-20210628032714440900000001",
+                    "policyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+                    "role": "hello-world-execution-ec48ee9"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-execution"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-execution"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/rolePolicyAttachment:RolePolicyAttachment::hello-world-execution-9a42f520",
+                "custom": true,
+                "id": "hello-world-execution-ec48ee9-20210628032714760200000002",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+                    "role": "hello-world-execution-ec48ee9"
+                },
+                "outputs": {
+                    "id": "hello-world-execution-ec48ee9-20210628032714760200000002",
+                    "policyArn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+                    "role": "hello-world-execution-ec48ee9"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-execution"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-execution"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::theiaJavaExamCluster-ssh",
+                "custom": false,
+                "type": "awsx:x:ec2:IngressSecurityGroupRule",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::theiaJavaExamCluster"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:EgressSecurityGroupRule::theiaJavaExamCluster-egress",
+                "custom": false,
+                "type": "awsx:x:ec2:EgressSecurityGroupRule",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::theiaJavaExamCluster"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::theiaJavaExamCluster-containers",
+                "custom": false,
+                "type": "awsx:x:ec2:IngressSecurityGroupRule",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::theiaJavaExamCluster"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup::tg",
+                "custom": false,
+                "type": "awsx:lb:NetworkTargetGroup",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer::nlb",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:x:elasticloadbalancingv2:NetworkTargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup::tg"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/rolePolicyAttachment:RolePolicyAttachment::hello-world-task-0cbb1731",
+                "custom": true,
+                "id": "hello-world-task-c89dc4f-20210628032714942800000003",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonECS_FullAccess",
+                    "role": "hello-world-task-c89dc4f"
+                },
+                "outputs": {
+                    "id": "hello-world-task-c89dc4f-20210628032714942800000003",
+                    "policyArn": "arn:aws:iam::aws:policy/AmazonECS_FullAccess",
+                    "role": "hello-world-task-c89dc4f"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-task"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-task"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/rolePolicyAttachment:RolePolicyAttachment::hello-world-task-b5aeb6b6",
+                "custom": true,
+                "id": "hello-world-task-c89dc4f-20210628032715628500000004",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "inputs": {
+                    "__defaults": [],
+                    "policyArn": "arn:aws:iam::aws:policy/AWSLambda_FullAccess",
+                    "role": "hello-world-task-c89dc4f"
+                },
+                "outputs": {
+                    "id": "hello-world-task-c89dc4f-20210628032715628500000004",
+                    "policyArn": "arn:aws:iam::aws:policy/AWSLambda_FullAccess",
+                    "role": "hello-world-task-c89dc4f"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-task"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "policyArn": null,
+                    "role": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-task"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:ec2/vpc:Vpc::default-vpc",
+                "custom": true,
+                "id": "vpc-ca5645a2",
+                "type": "aws:ec2/vpc:Vpc",
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:ap-south-1:879477489453:vpc/vpc-ca5645a2",
+                    "assignGeneratedIpv6CidrBlock": false,
+                    "cidrBlock": "172.31.0.0/16",
+                    "defaultNetworkAclId": "acl-959369fe",
+                    "defaultRouteTableId": "rtb-92f223f9",
+                    "defaultSecurityGroupId": "sg-1b7fac79",
+                    "dhcpOptionsId": "dopt-a18f71ca",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "id": "vpc-ca5645a2",
+                    "instanceTenancy": "default",
+                    "ipv6AssociationId": "",
+                    "ipv6CidrBlock": "",
+                    "mainRouteTableId": "rtb-92f223f9",
+                    "ownerId": "879477489453",
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2",
+                "external": true,
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                "custom": true,
+                "id": "subnet-aba2cce7",
+                "type": "aws:ec2/subnet:Subnet",
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:ap-south-1:879477489453:subnet/subnet-aba2cce7",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "ap-south-1b",
+                    "availabilityZoneId": "aps1-az3",
+                    "cidrBlock": "172.31.0.0/20",
+                    "customerOwnedIpv4Pool": "",
+                    "id": "subnet-aba2cce7",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapCustomerOwnedIpOnLaunch": false,
+                    "mapPublicIpOnLaunch": true,
+                    "outpostArn": "",
+                    "ownerId": "879477489453",
+                    "tags": {},
+                    "tagsAll": {},
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc::default-vpc",
+                "external": true,
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                "custom": true,
+                "id": "subnet-53902028",
+                "type": "aws:ec2/subnet:Subnet",
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:ap-south-1:879477489453:subnet/subnet-53902028",
+                    "assignIpv6AddressOnCreation": false,
+                    "availabilityZone": "ap-south-1c",
+                    "availabilityZoneId": "aps1-az2",
+                    "cidrBlock": "172.31.16.0/20",
+                    "customerOwnedIpv4Pool": "",
+                    "id": "subnet-53902028",
+                    "ipv6CidrBlock": "",
+                    "ipv6CidrBlockAssociationId": "",
+                    "mapCustomerOwnedIpOnLaunch": false,
+                    "mapPublicIpOnLaunch": true,
+                    "outpostArn": "",
+                    "ownerId": "879477489453",
+                    "tags": {},
+                    "tagsAll": {},
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc::default-vpc",
+                "external": true,
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072"
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-1",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc::default-vpc",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-1",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-ca5645a2-public-1"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-0",
+                "custom": false,
+                "type": "awsx:x:ec2:Subnet",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc::default-vpc",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-public-0",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$awsx:x:ec2:Subnet::default-vpc-ca5645a2-public-0"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster",
+                "custom": true,
+                "id": "sg-0692c127c24cb1c38",
+                "type": "aws:ec2/securityGroup:SecurityGroup",
+                "inputs": {
+                    "__defaults": [
+                        "name",
+                        "revokeRulesOnDelete"
+                    ],
+                    "description": "Managed by Pulumi",
+                    "name": "theiaJavaExamCluster-af8ea12",
+                    "revokeRulesOnDelete": false,
+                    "tags": {
+                        "Name": "theiaJavaExamCluster",
+                        "__defaults": []
+                    },
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":900000000000},\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ec2:ap-south-1:879477489453:security-group/sg-0692c127c24cb1c38",
+                    "description": "Managed by Pulumi",
+                    "egress": [],
+                    "id": "sg-0692c127c24cb1c38",
+                    "ingress": [],
+                    "name": "theiaJavaExamCluster-af8ea12",
+                    "namePrefix": "",
+                    "ownerId": "879477489453",
+                    "revokeRulesOnDelete": false,
+                    "tags": {
+                        "Name": "theiaJavaExamCluster"
+                    },
+                    "tagsAll": {
+                        "Name": "theiaJavaExamCluster"
+                    },
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup::theiaJavaExamCluster",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:ec2/vpc:Vpc::default-vpc"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "description": null,
+                    "tags": null,
+                    "vpcId": [
+                        "urn:pulumi:demo2::circle_ci_demo::aws:ec2/vpc:Vpc::default-vpc"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener::nginx",
+                "custom": false,
+                "type": "awsx:lb:NetworkListener",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup::tg",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:x:elasticloadbalancingv2:NetworkListener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:x:elasticloadbalancingv2:NetworkTargetGroup$awsx:lb:NetworkListener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener::nginx"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::theiaJavaExamCluster-containers",
+                "custom": true,
+                "id": "sgrule-3666684488",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow incoming tcp on any port from any ipv4 address",
+                    "fromPort": 0,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "toPort": 65535,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow incoming tcp on any port from any ipv4 address",
+                    "fromPort": 0,
+                    "id": "sgrule-3666684488",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "self": false,
+                    "toPort": 65535,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::theiaJavaExamCluster-containers",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::theiaJavaExamCluster-egress",
+                "custom": true,
+                "id": "sgrule-852589891",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow output to any ipv4 address using any protocol",
+                    "fromPort": 0,
+                    "protocol": "-1",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow output to any ipv4 address using any protocol",
+                    "fromPort": 0,
+                    "id": "sgrule-852589891",
+                    "protocol": "-1",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "self": false,
+                    "toPort": 0,
+                    "type": "egress"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:EgressSecurityGroupRule::theiaJavaExamCluster-egress",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::theiaJavaExamCluster-ssh",
+                "custom": true,
+                "id": "sgrule-1701267719",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow ssh in from any ipv4 address",
+                    "fromPort": 22,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "toPort": 22,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "allow ssh in from any ipv4 address",
+                    "fromPort": 22,
+                    "id": "sgrule-1701267719",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "self": false,
+                    "toPort": 22,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$awsx:x:ec2:IngressSecurityGroupRule::theiaJavaExamCluster-ssh",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/tg-99e47b8/5aca15c624a73c95",
+                "type": "aws:lb/targetGroup:TargetGroup",
+                "inputs": {
+                    "__defaults": [
+                        "lambdaMultiValueHeadersEnabled",
+                        "name",
+                        "proxyProtocolV2",
+                        "slowStart"
+                    ],
+                    "deregistrationDelay": 300,
+                    "lambdaMultiValueHeadersEnabled": false,
+                    "name": "tg-99e47b8",
+                    "port": 3000,
+                    "protocol": "TCP",
+                    "proxyProtocolV2": false,
+                    "slowStart": 0,
+                    "tags": {
+                        "Name": "tg",
+                        "__defaults": []
+                    },
+                    "targetType": "ip",
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "outputs": {
+                    "arn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/tg-99e47b8/5aca15c624a73c95",
+                    "arnSuffix": "targetgroup/tg-99e47b8/5aca15c624a73c95",
+                    "deregistrationDelay": 300,
+                    "healthCheck": {
+                        "enabled": true,
+                        "healthyThreshold": 3,
+                        "interval": 30,
+                        "matcher": "",
+                        "path": "",
+                        "port": "traffic-port",
+                        "protocol": "TCP",
+                        "timeout": 10,
+                        "unhealthyThreshold": 3
+                    },
+                    "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/tg-99e47b8/5aca15c624a73c95",
+                    "lambdaMultiValueHeadersEnabled": false,
+                    "name": "tg-99e47b8",
+                    "port": 3000,
+                    "preserveClientIp": "false",
+                    "protocol": "TCP",
+                    "proxyProtocolV2": false,
+                    "slowStart": 0,
+                    "stickiness": {
+                        "cookieDuration": 0,
+                        "enabled": false,
+                        "type": "source_ip"
+                    },
+                    "tags": {
+                        "Name": "tg"
+                    },
+                    "tagsAll": {
+                        "Name": "tg"
+                    },
+                    "targetType": "ip",
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup::tg",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:ec2/vpc:Vpc::default-vpc"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "deregistrationDelay": null,
+                    "port": null,
+                    "protocol": null,
+                    "tags": null,
+                    "targetType": null,
+                    "vpcId": [
+                        "urn:pulumi:demo2::circle_ci_demo::aws:ec2/vpc:Vpc::default-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::e4b203cd",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:elasticloadbalancingv2/targetGroup:TargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:x:elasticloadbalancingv2:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$aws:lb/loadBalancer:LoadBalancer::nlb",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/net/nlb-fe94332/4773ad23cea45f12",
+                "type": "aws:lb/loadBalancer:LoadBalancer",
+                "inputs": {
+                    "__defaults": [
+                        "dropInvalidHeaderFields",
+                        "enableCrossZoneLoadBalancing",
+                        "enableDeletionProtection",
+                        "enableHttp2",
+                        "idleTimeout",
+                        "name"
+                    ],
+                    "dropInvalidHeaderFields": false,
+                    "enableCrossZoneLoadBalancing": false,
+                    "enableDeletionProtection": false,
+                    "enableHttp2": true,
+                    "idleTimeout": 60,
+                    "internal": false,
+                    "loadBalancerType": "network",
+                    "name": "nlb-fe94332",
+                    "securityGroups": [],
+                    "subnets": [
+                        "subnet-aba2cce7",
+                        "subnet-53902028"
+                    ],
+                    "tags": {
+                        "Name": "nlb",
+                        "__defaults": []
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000,\"update\":600000000000}}",
+                    "accessLogs": {
+                        "bucket": "",
+                        "enabled": false,
+                        "prefix": ""
+                    },
+                    "arn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/net/nlb-fe94332/4773ad23cea45f12",
+                    "arnSuffix": "net/nlb-fe94332/4773ad23cea45f12",
+                    "customerOwnedIpv4Pool": "",
+                    "dnsName": "nlb-fe94332-4773ad23cea45f12.elb.ap-south-1.amazonaws.com",
+                    "enableCrossZoneLoadBalancing": false,
+                    "enableDeletionProtection": false,
+                    "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/net/nlb-fe94332/4773ad23cea45f12",
+                    "internal": false,
+                    "ipAddressType": "ipv4",
+                    "loadBalancerType": "network",
+                    "name": "nlb-fe94332",
+                    "securityGroups": [],
+                    "subnetMappings": [
+                        {
+                            "allocationId": "",
+                            "ipv6Address": "",
+                            "outpostId": "",
+                            "privateIpv4Address": "",
+                            "subnetId": "subnet-53902028"
+                        },
+                        {
+                            "allocationId": "",
+                            "ipv6Address": "",
+                            "outpostId": "",
+                            "privateIpv4Address": "",
+                            "subnetId": "subnet-aba2cce7"
+                        }
+                    ],
+                    "subnets": [
+                        "subnet-aba2cce7",
+                        "subnet-53902028"
+                    ],
+                    "tags": {
+                        "Name": "nlb"
+                    },
+                    "tagsAll": {
+                        "Name": "nlb"
+                    },
+                    "vpcId": "vpc-ca5645a2",
+                    "zoneId": "ZVDDRBQ08TROA"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer::nlb",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "internal": null,
+                    "loadBalancerType": null,
+                    "securityGroups": null,
+                    "subnets": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1"
+                    ],
+                    "tags": null
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$aws:lb/loadBalancer:LoadBalancer::f10a0909",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$aws:elasticloadbalancingv2/loadBalancer:LoadBalancer::nlb",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:NetworkLoadBalancer$aws:lb/loadBalancer:LoadBalancer::nlb"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:listener/net/nlb-fe94332/4773ad23cea45f12/e9ff5ed261b0e85a",
+                "type": "aws:lb/listener:Listener",
+                "inputs": {
+                    "__defaults": [],
+                    "defaultActions": [
+                        {
+                            "__defaults": [],
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/tg-99e47b8/5aca15c624a73c95",
+                            "type": "forward"
+                        }
+                    ],
+                    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/net/nlb-fe94332/4773ad23cea45f12",
+                    "port": 80,
+                    "protocol": "TCP"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"read\":600000000000}}",
+                    "arn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:listener/net/nlb-fe94332/4773ad23cea45f12/e9ff5ed261b0e85a",
+                    "defaultActions": [
+                        {
+                            "authenticateCognito": null,
+                            "authenticateOidc": null,
+                            "fixedResponse": null,
+                            "forward": null,
+                            "order": 1,
+                            "redirect": null,
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/tg-99e47b8/5aca15c624a73c95",
+                            "type": "forward"
+                        }
+                    ],
+                    "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:listener/net/nlb-fe94332/4773ad23cea45f12/e9ff5ed261b0e85a",
+                    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/net/nlb-fe94332/4773ad23cea45f12",
+                    "port": 80,
+                    "protocol": "TCP",
+                    "sslPolicy": "",
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener::nginx",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$aws:lb/loadBalancer:LoadBalancer::nlb"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "defaultActions": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg"
+                    ],
+                    "loadBalancerArn": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$aws:lb/loadBalancer:LoadBalancer::nlb"
+                    ],
+                    "port": null,
+                    "protocol": null
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:elasticloadbalancingv2/listener:Listener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:x:elasticloadbalancingv2:NetworkListener$aws:lb/listener:Listener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:x:elasticloadbalancingv2:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::hello-world",
+                "custom": true,
+                "id": "theiaJava",
+                "type": "aws:ecs/taskDefinition:TaskDefinition",
+                "inputs": {
+                    "__defaults": [],
+                    "containerDefinitions": "[{\"image\":\"879477489453.dkr.ecr.ap-south-1.amazonaws.com/theia-java-exam-1aed4a4:ebf680b7253ae054f6c8cb3bc1a67b099c436462ed065c13218f32fd67bc1a4a\",\"essential\":true,\"portMappings\":[{\"containerPort\":3000,\"hostPort\":3000}],\"environment\":[],\"name\":\"container\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"hello-world-2801eb5\",\"awslogs-region\":\"ap-south-1\",\"awslogs-stream-prefix\":\"container\"}}}]",
+                    "cpu": "256",
+                    "executionRoleArn": "arn:aws:iam::879477489453:role/hello-world-execution-ec48ee9",
+                    "family": "theiaJava",
+                    "memory": "512",
+                    "networkMode": "awsvpc",
+                    "requiresCompatibilities": [
+                        "FARGATE"
+                    ],
+                    "taskRoleArn": "arn:aws:iam::879477489453:role/hello-world-task-c89dc4f"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"1\"}",
+                    "arn": "arn:aws:ecs:ap-south-1:879477489453:task-definition/theiaJava:5",
+                    "containerDefinitions": "[{\"cpu\":0,\"environment\":[],\"essential\":true,\"image\":\"879477489453.dkr.ecr.ap-south-1.amazonaws.com/theia-java-exam-1aed4a4:ebf680b7253ae054f6c8cb3bc1a67b099c436462ed065c13218f32fd67bc1a4a\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"hello-world-2801eb5\",\"awslogs-region\":\"ap-south-1\",\"awslogs-stream-prefix\":\"container\"}},\"mountPoints\":[],\"name\":\"container\",\"portMappings\":[{\"containerPort\":3000,\"hostPort\":3000,\"protocol\":\"tcp\"}],\"volumesFrom\":[]}]",
+                    "cpu": "256",
+                    "ephemeralStorage": null,
+                    "executionRoleArn": "arn:aws:iam::879477489453:role/hello-world-execution-ec48ee9",
+                    "family": "theiaJava",
+                    "id": "theiaJava",
+                    "inferenceAccelerators": [],
+                    "ipcMode": "",
+                    "memory": "512",
+                    "networkMode": "awsvpc",
+                    "pidMode": "",
+                    "placementConstraints": [],
+                    "proxyConfiguration": null,
+                    "requiresCompatibilities": [
+                        "FARGATE"
+                    ],
+                    "revision": 5,
+                    "tags": {},
+                    "tagsAll": {},
+                    "taskRoleArn": "arn:aws:iam::879477489453:role/hello-world-task-c89dc4f",
+                    "volumes": []
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition::hello-world",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::hello-world",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecr/repository:Repository::theia-java-exam",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-execution",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-task"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "containerDefinitions": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecr/repository:Repository::theia-java-exam",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::hello-world",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx"
+                    ],
+                    "cpu": null,
+                    "executionRoleArn": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-execution"
+                    ],
+                    "family": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecr/repository:Repository::theia-java-exam",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:cloudwatch/logGroup:LogGroup::hello-world",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx"
+                    ],
+                    "memory": null,
+                    "networkMode": null,
+                    "requiresCompatibilities": null,
+                    "taskRoleArn": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:iam/role:Role::hello-world-task"
+                    ]
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateService$aws:ecs/service:Service::app-svc",
+                "custom": true,
+                "id": "arn:aws:ecs:ap-south-1:879477489453:service/theiaJavaExamCluster-4b8becc/app-svc-b7af9f4",
+                "type": "aws:ecs/service:Service",
+                "inputs": {
+                    "__defaults": [
+                        "deploymentMaximumPercent",
+                        "deploymentMinimumHealthyPercent",
+                        "enableEcsManagedTags",
+                        "enableExecuteCommand",
+                        "name",
+                        "schedulingStrategy"
+                    ],
+                    "cluster": "arn:aws:ecs:ap-south-1:879477489453:cluster/theiaJavaExamCluster-4b8becc",
+                    "deploymentMaximumPercent": 200,
+                    "deploymentMinimumHealthyPercent": 100,
+                    "desiredCount": 1,
+                    "enableEcsManagedTags": false,
+                    "enableExecuteCommand": false,
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                        {
+                            "__defaults": [],
+                            "containerName": "container",
+                            "containerPort": 3000,
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/tg-99e47b8/5aca15c624a73c95"
+                        }
+                    ],
+                    "name": "app-svc-b7af9f4",
+                    "networkConfiguration": {
+                        "__defaults": [],
+                        "assignPublicIp": true,
+                        "securityGroups": [
+                            "sg-0692c127c24cb1c38"
+                        ],
+                        "subnets": [
+                            "subnet-aba2cce7",
+                            "subnet-53902028"
+                        ]
+                    },
+                    "schedulingStrategy": "REPLICA",
+                    "taskDefinition": "arn:aws:ecs:ap-south-1:879477489453:task-definition/theiaJava:5",
+                    "waitForSteadyState": true
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                    "capacityProviderStrategies": [],
+                    "cluster": "arn:aws:ecs:ap-south-1:879477489453:cluster/theiaJavaExamCluster-4b8becc",
+                    "deploymentCircuitBreaker": {
+                        "enable": false,
+                        "rollback": false
+                    },
+                    "deploymentController": {
+                        "type": "ECS"
+                    },
+                    "deploymentMaximumPercent": 200,
+                    "deploymentMinimumHealthyPercent": 100,
+                    "desiredCount": 1,
+                    "enableEcsManagedTags": false,
+                    "enableExecuteCommand": false,
+                    "healthCheckGracePeriodSeconds": 0,
+                    "iamRole": "aws-service-role",
+                    "id": "arn:aws:ecs:ap-south-1:879477489453:service/theiaJavaExamCluster-4b8becc/app-svc-b7af9f4",
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                        {
+                            "containerName": "container",
+                            "containerPort": 3000,
+                            "elbName": "",
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/tg-99e47b8/5aca15c624a73c95"
+                        }
+                    ],
+                    "name": "app-svc-b7af9f4",
+                    "networkConfiguration": {
+                        "assignPublicIp": true,
+                        "securityGroups": [
+                            "sg-0692c127c24cb1c38"
+                        ],
+                        "subnets": [
+                            "subnet-aba2cce7",
+                            "subnet-53902028"
+                        ]
+                    },
+                    "orderedPlacementStrategies": [],
+                    "placementConstraints": [],
+                    "platformVersion": "LATEST",
+                    "propagateTags": "NONE",
+                    "schedulingStrategy": "REPLICA",
+                    "serviceRegistries": null,
+                    "tags": {},
+                    "tagsAll": {},
+                    "taskDefinition": "arn:aws:ecs:ap-south-1:879477489453:task-definition/theiaJava:5",
+                    "waitForSteadyState": true
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateService::app-svc",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::theiaJavaExamCluster",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::hello-world"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "cluster": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::theiaJavaExamCluster"
+                    ],
+                    "desiredCount": null,
+                    "launchType": null,
+                    "loadBalancers": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$awsx:lb:NetworkListener$aws:lb/listener:Listener::nginx",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:lb:NetworkLoadBalancer$awsx:lb:NetworkTargetGroup$aws:lb/targetGroup:TargetGroup::tg"
+                    ],
+                    "networkConfiguration": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "taskDefinition": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::hello-world"
+                    ],
+                    "waitForSteadyState": null
+                }
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer::net-lb",
+                "custom": false,
+                "type": "aws:lb:ApplicationLoadBalancer",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::pulumi:pulumi:Stack::circle_ci_demo-demo2",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer::net-lb"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::web",
+                "custom": false,
+                "type": "awsx:lb:ApplicationListener",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer::net-lb",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener::web",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::web",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener::web"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup::web",
+                "custom": false,
+                "type": "awsx:lb:ApplicationTargetGroup",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer::net-lb",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationTargetGroup::web",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup::web",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup::web"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::web-external-0-egress",
+                "custom": false,
+                "type": "awsx:x:ec2:EgressSecurityGroupRule",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::web",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::web-external-0-egress",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::web-external-0-egress",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::web-external-0-egress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::web-external-0-ingress",
+                "custom": false,
+                "type": "awsx:x:ec2:IngressSecurityGroupRule",
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::web",
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::web-external-0-ingress",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::web-external-0-ingress",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::web-external-0-ingress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/web-da53b89/2f0ab5956ed7328c",
+                "type": "aws:lb/targetGroup:TargetGroup",
+                "inputs": {
+                    "__defaults": [
+                        "lambdaMultiValueHeadersEnabled",
+                        "name",
+                        "proxyProtocolV2",
+                        "slowStart"
+                    ],
+                    "deregistrationDelay": 300,
+                    "lambdaMultiValueHeadersEnabled": false,
+                    "name": "web-da53b89",
+                    "port": 3000,
+                    "protocol": "HTTP",
+                    "proxyProtocolV2": false,
+                    "slowStart": 0,
+                    "tags": {
+                        "Name": "web",
+                        "__defaults": []
+                    },
+                    "targetType": "ip",
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "outputs": {
+                    "arn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/web-da53b89/2f0ab5956ed7328c",
+                    "arnSuffix": "targetgroup/web-da53b89/2f0ab5956ed7328c",
+                    "deregistrationDelay": 300,
+                    "healthCheck": {
+                        "enabled": true,
+                        "healthyThreshold": 5,
+                        "interval": 30,
+                        "matcher": "200",
+                        "path": "/",
+                        "port": "traffic-port",
+                        "protocol": "HTTP",
+                        "timeout": 5,
+                        "unhealthyThreshold": 2
+                    },
+                    "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/web-da53b89/2f0ab5956ed7328c",
+                    "lambdaMultiValueHeadersEnabled": false,
+                    "loadBalancingAlgorithmType": "round_robin",
+                    "name": "web-da53b89",
+                    "port": 3000,
+                    "protocol": "HTTP",
+                    "protocolVersion": "HTTP1",
+                    "proxyProtocolV2": false,
+                    "slowStart": 0,
+                    "stickiness": {
+                        "cookieDuration": 86400,
+                        "enabled": false,
+                        "type": "lb_cookie"
+                    },
+                    "tags": {
+                        "Name": "web"
+                    },
+                    "tagsAll": {
+                        "Name": "web"
+                    },
+                    "targetType": "ip",
+                    "vpcId": "vpc-ca5645a2"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup::web",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:ec2/vpc:Vpc::default-vpc"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "deregistrationDelay": null,
+                    "port": null,
+                    "protocol": null,
+                    "tags": null,
+                    "targetType": null,
+                    "vpcId": [
+                        "urn:pulumi:demo2::circle_ci_demo::aws:ec2/vpc:Vpc::default-vpc"
+                    ]
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::ca84d134",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:elasticloadbalancingv2/targetGroup:TargetGroup::web",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-ingress",
+                "custom": true,
+                "id": "sgrule-3255018994",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 3000",
+                    "fromPort": 3000,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "toPort": 3000,
+                    "type": "ingress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 3000",
+                    "fromPort": 3000,
+                    "id": "sgrule-3255018994",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "self": false,
+                    "toPort": 3000,
+                    "type": "ingress"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule::web-external-0-ingress",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-ingress",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-ingress",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:IngressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-ingress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::net-lb",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/app/net-lb-d008bfa/0ecb96f346b08185",
+                "type": "aws:lb/loadBalancer:LoadBalancer",
+                "inputs": {
+                    "__defaults": [
+                        "dropInvalidHeaderFields",
+                        "enableCrossZoneLoadBalancing",
+                        "enableDeletionProtection",
+                        "enableHttp2",
+                        "idleTimeout",
+                        "name"
+                    ],
+                    "dropInvalidHeaderFields": false,
+                    "enableCrossZoneLoadBalancing": false,
+                    "enableDeletionProtection": false,
+                    "enableHttp2": true,
+                    "idleTimeout": 60,
+                    "internal": false,
+                    "loadBalancerType": "application",
+                    "name": "net-lb-d008bfa",
+                    "securityGroups": [
+                        "sg-0692c127c24cb1c38"
+                    ],
+                    "subnets": [
+                        "subnet-aba2cce7",
+                        "subnet-53902028"
+                    ],
+                    "tags": {
+                        "Name": "net-lb",
+                        "__defaults": []
+                    }
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000,\"update\":600000000000}}",
+                    "accessLogs": {
+                        "bucket": "",
+                        "enabled": false,
+                        "prefix": ""
+                    },
+                    "arn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/app/net-lb-d008bfa/0ecb96f346b08185",
+                    "arnSuffix": "app/net-lb-d008bfa/0ecb96f346b08185",
+                    "customerOwnedIpv4Pool": "",
+                    "dnsName": "net-lb-d008bfa-504628000.ap-south-1.elb.amazonaws.com",
+                    "dropInvalidHeaderFields": false,
+                    "enableDeletionProtection": false,
+                    "enableHttp2": true,
+                    "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/app/net-lb-d008bfa/0ecb96f346b08185",
+                    "idleTimeout": 60,
+                    "internal": false,
+                    "ipAddressType": "ipv4",
+                    "loadBalancerType": "application",
+                    "name": "net-lb-d008bfa",
+                    "securityGroups": [
+                        "sg-0692c127c24cb1c38"
+                    ],
+                    "subnetMappings": [
+                        {
+                            "allocationId": "",
+                            "ipv6Address": "",
+                            "outpostId": "",
+                            "privateIpv4Address": "",
+                            "subnetId": "subnet-53902028"
+                        },
+                        {
+                            "allocationId": "",
+                            "ipv6Address": "",
+                            "outpostId": "",
+                            "privateIpv4Address": "",
+                            "subnetId": "subnet-aba2cce7"
+                        }
+                    ],
+                    "subnets": [
+                        "subnet-aba2cce7",
+                        "subnet-53902028"
+                    ],
+                    "tags": {
+                        "Name": "net-lb"
+                    },
+                    "tagsAll": {
+                        "Name": "net-lb"
+                    },
+                    "vpcId": "vpc-ca5645a2",
+                    "zoneId": "ZP97RAFLXTNZK"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer::net-lb",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "internal": null,
+                    "loadBalancerType": null,
+                    "securityGroups": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "subnets": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1"
+                    ],
+                    "tags": null
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::218ffe37",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$aws:elasticloadbalancingv2/loadBalancer:LoadBalancer::net-lb",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::net-lb"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-egress",
+                "custom": true,
+                "id": "sgrule-3733831914",
+                "type": "aws:ec2/securityGroupRule:SecurityGroupRule",
+                "inputs": {
+                    "__defaults": [],
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 3000",
+                    "fromPort": 3000,
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "toPort": 3000,
+                    "type": "egress"
+                },
+                "outputs": {
+                    "__meta": "{\"schema_version\":\"2\"}",
+                    "cidrBlocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description": "Externally available at port 3000",
+                    "fromPort": 3000,
+                    "id": "sgrule-3733831914",
+                    "protocol": "tcp",
+                    "securityGroupId": "sg-0692c127c24cb1c38",
+                    "self": false,
+                    "toPort": 3000,
+                    "type": "egress"
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule::web-external-0-egress",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "cidrBlocks": null,
+                    "description": null,
+                    "fromPort": null,
+                    "protocol": null,
+                    "securityGroupId": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "toPort": null,
+                    "type": null
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-egress",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-egress",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$awsx:x:ec2:EgressSecurityGroupRule$aws:ec2/securityGroupRule:SecurityGroupRule::web-external-0-egress"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::web",
+                "custom": true,
+                "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:listener/app/net-lb-d008bfa/0ecb96f346b08185/2a78af5883af7314",
+                "type": "aws:lb/listener:Listener",
+                "inputs": {
+                    "__defaults": [],
+                    "defaultActions": [
+                        {
+                            "__defaults": [],
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/web-da53b89/2f0ab5956ed7328c",
+                            "type": "forward"
+                        }
+                    ],
+                    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/app/net-lb-d008bfa/0ecb96f346b08185",
+                    "port": 3000,
+                    "protocol": "HTTP"
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"read\":600000000000}}",
+                    "arn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:listener/app/net-lb-d008bfa/0ecb96f346b08185/2a78af5883af7314",
+                    "defaultActions": [
+                        {
+                            "authenticateCognito": null,
+                            "authenticateOidc": null,
+                            "fixedResponse": null,
+                            "forward": null,
+                            "order": 1,
+                            "redirect": null,
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/web-da53b89/2f0ab5956ed7328c",
+                            "type": "forward"
+                        }
+                    ],
+                    "id": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:listener/app/net-lb-d008bfa/0ecb96f346b08185/2a78af5883af7314",
+                    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:loadbalancer/app/net-lb-d008bfa/0ecb96f346b08185",
+                    "port": 3000,
+                    "protocol": "HTTP",
+                    "sslPolicy": "",
+                    "tags": {},
+                    "tagsAll": {}
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener::web",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::net-lb",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "defaultActions": [
+                        "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web"
+                    ],
+                    "loadBalancerArn": [
+                        "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::net-lb"
+                    ],
+                    "port": null,
+                    "protocol": null
+                },
+                "aliases": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:elasticloadbalancingv2/listener:Listener::web",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:x:elasticloadbalancingv2:ApplicationListener$aws:lb/listener:Listener::web",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::web",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:elasticloadbalancingv2:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::web"
+                ]
+            },
+            {
+                "urn": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateService$aws:ecs/service:Service::app-svc",
+                "custom": true,
+                "delete": true,
+                "id": "arn:aws:ecs:ap-south-1:879477489453:service/theiaJavaExamCluster-4b8becc/app-svc-6a75198",
+                "type": "aws:ecs/service:Service",
+                "inputs": {
+                    "__defaults": [
+                        "deploymentMaximumPercent",
+                        "deploymentMinimumHealthyPercent",
+                        "enableEcsManagedTags",
+                        "enableExecuteCommand",
+                        "name",
+                        "schedulingStrategy"
+                    ],
+                    "cluster": "arn:aws:ecs:ap-south-1:879477489453:cluster/theiaJavaExamCluster-4b8becc",
+                    "deploymentMaximumPercent": 200,
+                    "deploymentMinimumHealthyPercent": 100,
+                    "desiredCount": 1,
+                    "enableEcsManagedTags": false,
+                    "enableExecuteCommand": false,
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                        {
+                            "__defaults": [],
+                            "containerName": "container",
+                            "containerPort": 3000,
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/web-da53b89/2f0ab5956ed7328c"
+                        }
+                    ],
+                    "name": "app-svc-6a75198",
+                    "networkConfiguration": {
+                        "__defaults": [],
+                        "assignPublicIp": true,
+                        "securityGroups": [
+                            "sg-0692c127c24cb1c38"
+                        ],
+                        "subnets": [
+                            "subnet-aba2cce7",
+                            "subnet-53902028"
+                        ]
+                    },
+                    "schedulingStrategy": "REPLICA",
+                    "taskDefinition": "arn:aws:ecs:ap-south-1:879477489453:task-definition/theiaJava:5",
+                    "waitForSteadyState": true
+                },
+                "outputs": {
+                    "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                    "capacityProviderStrategies": [],
+                    "cluster": "arn:aws:ecs:ap-south-1:879477489453:cluster/theiaJavaExamCluster-4b8becc",
+                    "deploymentCircuitBreaker": {
+                        "enable": false,
+                        "rollback": false
+                    },
+                    "deploymentController": {
+                        "type": "ECS"
+                    },
+                    "deploymentMaximumPercent": 200,
+                    "deploymentMinimumHealthyPercent": 100,
+                    "desiredCount": 1,
+                    "enableEcsManagedTags": false,
+                    "enableExecuteCommand": false,
+                    "healthCheckGracePeriodSeconds": 0,
+                    "iamRole": "aws-service-role",
+                    "id": "arn:aws:ecs:ap-south-1:879477489453:service/theiaJavaExamCluster-4b8becc/app-svc-6a75198",
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                        {
+                            "containerName": "container",
+                            "containerPort": 3000,
+                            "elbName": "",
+                            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:879477489453:targetgroup/web-da53b89/2f0ab5956ed7328c"
+                        }
+                    ],
+                    "name": "app-svc-6a75198",
+                    "networkConfiguration": {
+                        "assignPublicIp": true,
+                        "securityGroups": [
+                            "sg-0692c127c24cb1c38"
+                        ],
+                        "subnets": [
+                            "subnet-aba2cce7",
+                            "subnet-53902028"
+                        ]
+                    },
+                    "orderedPlacementStrategies": [],
+                    "placementConstraints": [],
+                    "platformVersion": "LATEST",
+                    "propagateTags": "NONE",
+                    "schedulingStrategy": "REPLICA",
+                    "serviceRegistries": null,
+                    "tags": {},
+                    "tagsAll": {},
+                    "taskDefinition": "arn:aws:ecs:ap-south-1:879477489453:task-definition/theiaJava:5",
+                    "waitForSteadyState": true
+                },
+                "parent": "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateService::app-svc",
+                "dependencies": [
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::web",
+                    "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::theiaJavaExamCluster",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster",
+                    "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::hello-world"
+                ],
+                "provider": "urn:pulumi:demo2::circle_ci_demo::pulumi:providers:aws::default_4_9_1::57e836e3-c401-4cd8-860f-66ffcfea1072",
+                "propertyDependencies": {
+                    "cluster": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$aws:ecs/cluster:Cluster::theiaJavaExamCluster"
+                    ],
+                    "desiredCount": null,
+                    "launchType": null,
+                    "loadBalancers": [
+                        "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationListener$aws:lb/listener:Listener::web",
+                        "urn:pulumi:demo2::circle_ci_demo::aws:lb:ApplicationLoadBalancer$awsx:lb:ApplicationTargetGroup$aws:lb/targetGroup:TargetGroup::web"
+                    ],
+                    "networkConfiguration": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-0",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ec2:Vpc$aws:ec2/subnet:Subnet::default-vpc-public-1",
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:Cluster$awsx:x:ec2:SecurityGroup$aws:ec2/securityGroup:SecurityGroup::theiaJavaExamCluster"
+                    ],
+                    "taskDefinition": [
+                        "urn:pulumi:demo2::circle_ci_demo::awsx:x:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::hello-world"
+                    ],
+                    "waitForSteadyState": null
+                }
+            }
+        ],
+        "pending_operations": []
+    }
+}

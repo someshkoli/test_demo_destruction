@@ -1,0 +1,26 @@
+version: 2.1
+orbs:
+  pulumi: pulumi/pulumi@2.0.0
+
+jobs:
+  build:
+    docker:
+      - image: 'circleci/node:14.16'
+    working_directory: ~/repo/
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - pulumi/login
+      - pulumi/stack_init:
+          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+      - pulumi/update:
+          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+      - pulumi/stack_output:
+          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
+          property_name: demoUrl
+          env_var: TEST_URL
+      - run: echo ${TEST_URL}
+      - pulumi/destroy
+      - pulumi/stack_rm:
+          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
