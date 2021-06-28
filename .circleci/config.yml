@@ -21,6 +21,7 @@ jobs:
           property_name: demoUrl
           env_var: TEST_URL
       - run: echo ${TEST_URL}
-      - pulumi/destroy
+      - pulumi/destroy:
+          stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
       - pulumi/stack_rm:
           stack: 'proxor-theia/test-pr_${CIRCLE_BUILD_NUM}'
